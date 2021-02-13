@@ -1,3 +1,12 @@
+/**
+ * Project Name    : first_appium_test
+ * Developer       : youvegotnigel
+ * Version         : 1.0.0
+ * Date            : 09/08/2020
+ * Description     :
+ **/
+
+import com.github.lkkushan101.appiumlocator.Locator;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -12,15 +21,6 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-/**
- * Project Name    : first_appium_test
- * Developer       : youvegotnigel
- * Version         : 1.0.0
- * Date            : 09/08/2020
- * Time            : 10:55 AM
- * Description     :
- **/
 
 
 public class LandingPageTest {
@@ -37,9 +37,17 @@ public class LandingPageTest {
         String ANDROID_APK_PATH = "/src/test/resources/ApiDemos.apk";
 
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "Samsung");
+
+        //real device
+        caps.setCapability("deviceName", "31f89655");
         caps.setCapability("platformName", "Android");
         caps.setCapability("platformVersion", "10.0.0");
+
+        //genymotion device
+//        caps.setCapability("deviceName", "192.168.26.101:5555");
+//        caps.setCapability("platformName", "Android");
+//        caps.setCapability("platformVersion", "7.1");
+
         caps.setCapability("app", new File(PROJECT_ROOT + ANDROID_APK_PATH).getAbsolutePath());
         caps.setCapability("appPackage", "io.appium.android.apis");
         caps.setCapability("appActivity", "io.appium.android.apis.ApiDemos");
@@ -161,6 +169,12 @@ public class LandingPageTest {
                 (By.xpath(menuItemXpath.replace(menuItemNamePlaceholder, "Views")));
 
         Assert.assertTrue(viewsMenuItem.isDisplayed());
+    }
+
+    @Test
+    public void appiumLocator()
+    {
+        Locator.GetAppiumLocators(); //Call this method
     }
 
     @AfterClass
