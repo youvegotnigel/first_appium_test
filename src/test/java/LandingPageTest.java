@@ -186,8 +186,9 @@ public class LandingPageTest {
         //AndroidElement list = (AndroidElement)driver.findElementById("android:id/list");
 
         //scroll down till element is found
-        MobileElement listItem = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList()" +
+        MobileElement listItem = driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList()" +
                 ".scrollIntoView(new UiSelector().text(\"ScrollBars\"));"));
+        System.out.println("Location : " + listItem.getLocation());
 
 
         //click on ScrollBars option
