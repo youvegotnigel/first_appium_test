@@ -19,6 +19,8 @@ Features:
 
 ## References
 * **Appium Locator** - [Linkedin Post](https://www.linkedin.com/posts/kushana_finally-doneappium-locator-10-has-been-activity-6766180114465136640-9xfF) 
+* **Appium Scroll** - [Appium](http://appium.io/docs/en/writing-running-appium/tutorial/swipe/android-layout-direction/) 
+
 
 ## Author
 * **Nigel Mulholland** - [Linkedin](https://www.linkedin.com/in/nigel-mulholland/) 
