@@ -7,8 +7,10 @@
  **/
 
 import com.github.lkkushan101.appiumlocator.Locator;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -39,14 +41,14 @@ public class LandingPageTest {
         DesiredCapabilities caps = new DesiredCapabilities();
 
         //real device
-        caps.setCapability("deviceName", "31f89655");
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion", "10.0.0");
+//        caps.setCapability("deviceName", "31f89655");
+//        caps.setCapability("platformName", "Android");
+//        caps.setCapability("platformVersion", "10.0.0");
 
         //genymotion device
-//        caps.setCapability("deviceName", "192.168.26.101:5555");
-//        caps.setCapability("platformName", "Android");
-//        caps.setCapability("platformVersion", "7.1");
+        caps.setCapability("deviceName", "192.168.26.101:5555");
+        caps.setCapability("platformName", "Android");
+        caps.setCapability("platformVersion", "7.1");
 
         caps.setCapability("app", new File(PROJECT_ROOT + ANDROID_APK_PATH).getAbsolutePath());
         caps.setCapability("appPackage", "io.appium.android.apis");
@@ -60,7 +62,7 @@ public class LandingPageTest {
         wait = new WebDriverWait(driver, 10);
     }
 
-    @Test
+    @Test(priority = 1)
     public void toolBarTest() {
         By toolBarTitle = By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView");
 
@@ -72,7 +74,7 @@ public class LandingPageTest {
         Assert.assertEquals(driver.findElement(toolBarTitle).getText(), "API Demos");
     }
 
-    @Test
+    @Test(priority = 1)
     public void accessibilityMenuTest() {
         // Verify Accessibility menu item is visible
         MobileElement accessibilityMenuItem = driver.findElement
@@ -81,7 +83,7 @@ public class LandingPageTest {
         Assert.assertTrue(accessibilityMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void animationMenuTest() {
         // Verify Animation menu item is visible
         MobileElement animationMenuItem = driver.findElement
@@ -90,7 +92,7 @@ public class LandingPageTest {
         Assert.assertTrue(animationMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void appMenuTest() {
         // Verify App menu item is visible
         MobileElement appMenuItem = driver.findElement
@@ -99,7 +101,7 @@ public class LandingPageTest {
         Assert.assertTrue(appMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void contentMenuTest() {
         // Verify Content menu item is visible
         MobileElement contentMenuItem = driver.findElement
@@ -108,7 +110,7 @@ public class LandingPageTest {
         Assert.assertTrue(contentMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void graphicsMenuTest() {
         // Verify Graphics menu item is visible
         MobileElement graphicsMenuItem = driver.findElement
@@ -117,7 +119,7 @@ public class LandingPageTest {
         Assert.assertTrue(graphicsMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void mediaMenuTest() {
         // Verify Media menu item is visible
         MobileElement mediaMenuItem = driver.findElement
@@ -126,7 +128,7 @@ public class LandingPageTest {
         Assert.assertTrue(mediaMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void nfcMenuTest() {
         // Verify NFC menu item is visible
         MobileElement nfcMenuItem = driver.findElement
@@ -135,7 +137,7 @@ public class LandingPageTest {
         Assert.assertTrue(nfcMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void osMenuTest() {
         // Verify OS menu item is visible
         MobileElement osMenuItem = driver.findElement
@@ -144,7 +146,7 @@ public class LandingPageTest {
         Assert.assertTrue(osMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void preferenceMenuTest() {
         // Verify Preference menu item is visible
         MobileElement preferenceMenuItem = driver.findElement
@@ -153,7 +155,7 @@ public class LandingPageTest {
         Assert.assertTrue(preferenceMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void textMenuTest() {
         // Verify Text menu item is visible
         MobileElement textMenuItem = driver.findElement
@@ -162,7 +164,7 @@ public class LandingPageTest {
         Assert.assertTrue(textMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 1)
     public void viewsMenuTest() {
         // Verify Views menu item is visible
         MobileElement viewsMenuItem = driver.findElement
@@ -171,7 +173,41 @@ public class LandingPageTest {
         Assert.assertTrue(viewsMenuItem.isDisplayed());
     }
 
-    @Test
+    @Test(priority = 2)
+    public void scrollTest(){
+
+        //click on Views menu
+        MobileElement viewsMenuItem = driver.findElement(By.xpath(menuItemXpath.replace(menuItemNamePlaceholder, "Views")));
+        viewsMenuItem.click();
+
+        //vertical scroll to ScrollBars option
+
+        //capture all list items
+        AndroidElement list = (AndroidElement)driver.findElementById("android:id/list");
+
+        //scroll down till element is found
+        MobileElement listItem = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList()" +
+                ".scrollIntoView(new UiSelector().text(\"ScrollBars\"));"));
+
+
+        //click on ScrollBars option
+        MobileElement scrollBarsMenuItem = driver.findElement(By.xpath(menuItemXpath.replace(menuItemNamePlaceholder, "ScrollBars")));
+        scrollBarsMenuItem.click();
+
+
+        By button = By.xpath(menuItemXpath.replace(menuItemNamePlaceholder, "1. Basic"));
+
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(button));
+
+        //verify text "1. Basic" is displayed
+        MobileElement basicMenuItem = driver.findElement(button);
+        Assert.assertTrue(basicMenuItem.isDisplayed());
+
+
+    }
+
+    @Test(enabled = false)
     public void appiumLocator()
     {
         Locator.GetAppiumLocators(); //Call this method
