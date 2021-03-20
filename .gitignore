@@ -1,4 +1,4 @@
-/.idea
+.idea
 /.settings
 .git
 .project
@@ -7,3 +7,4 @@
 target
 test-output
 *.pdf
+target/test-classes/LandingPageTest.class
