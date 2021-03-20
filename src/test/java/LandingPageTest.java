@@ -183,7 +183,7 @@ public class LandingPageTest {
         //vertical scroll to ScrollBars option
 
         //capture all list items
-        AndroidElement list = (AndroidElement)driver.findElementById("android:id/list");
+        //AndroidElement list = (AndroidElement)driver.findElementById("android:id/list");
 
         //scroll down till element is found
         MobileElement listItem = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList()" +
